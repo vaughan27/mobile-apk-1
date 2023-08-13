@@ -1,4 +1,3 @@
-import React from "react";
 import { NativeBaseProvider, useColorMode, Text, Button, Center, Box, useColorModeValue } from "native-base";
 
 function UseColorMode() {

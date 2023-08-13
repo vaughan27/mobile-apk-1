@@ -1,5 +1,4 @@
-import React from "react"
-import { StyleSheet,Button,TextInput,View,Text,Pressable,Keyboard} from "react-native"
+import { StyleSheet,Button,TextInput,View,Text,} from "react-native"
 import { Formik } from "formik"
 import * as yup from 'yup';
 
@@ -19,7 +18,7 @@ const reviewSchema = yup.object({
     }),
 });
 
-export default function InputData({ addEntry }) {
+export default function InputData(props) {
 
   return (
       
@@ -29,7 +28,8 @@ export default function InputData({ addEntry }) {
       validationSchema={reviewSchema}
       onSubmit={(values, actions) => {
         actions.resetForm(); 
-        addEntry(values);
+        // console.log(values);
+        props.onAdd(values);
     }}
   >
     {props => (
