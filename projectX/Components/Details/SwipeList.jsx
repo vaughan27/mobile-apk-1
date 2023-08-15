@@ -18,7 +18,7 @@ function GoalItem(props){
           
         </Pressable>
       </View>
-      <Button style={styles.buttonstuff} title='edit' onPress={console.log(' press')}  />
+      <Button style={styles.buttonstuff} title='edit' onClick={console.log(' press')}  />
     </View>
     );
    
