@@ -1,10 +1,10 @@
 import { StyleSheet,Button,TextInput,View,Text,} from "react-native"
 import { Formik } from "formik"
 import * as yup from 'yup';
+import { Select, VStack, CheckIcon } from "native-base";
+import { useState } from "react";
 
-import DropDown from "./DropDown";
-
-const reviewSchema = yup.object({
+const inputSchema = yup.object({
   name: yup.string()
     .required()
     .min(4),
@@ -16,18 +16,22 @@ const reviewSchema = yup.object({
     .test('is-num-18-99', 'Rating must be a number 18 - 99', (val) => {
       return parseInt(val) < 99 && parseInt(val) > 18;
     }),
+  designation:yup.string()
+      .required()
 });
 
 export default function InputData(props) {
+  const [designation, setdesignation] = useState('');
 
   return (
       
   <View  style={Styles.container}> 
     <Formik
-      initialValues={{ name: '', age: '', description: ''  }}
-      validationSchema={reviewSchema}
+      initialValues={{ name: '', age: '', description: '', designation: ''  }}
+      validationSchema={inputSchema}
       onSubmit={(values, actions) => {
-        actions.resetForm(); 
+        actions.resetForm();
+        values.designation = designation; 
         // console.log(values);
         props.onAdd(values);
     }}
@@ -65,7 +69,59 @@ export default function InputData(props) {
         />
         <Text style={Styles.errorText}>{props.touched.description && props.errors.description}</Text>
 
-        <DropDown />
+        <View style={Styles.drop}>
+        <VStack alignItems='center' space={4} style={Styles.drop}>
+              <Select
+                shadow={2}
+                selectedValue={props.values.designation}
+                minWidth='353'
+                accessibilityLabel='Choose Designation'
+                placeholder='Choose Designation'
+                _selectedItem={{
+                  bg: 'lavender',
+                  endIcon: <CheckIcon size='5' />,
+                }}
+                _light={{
+                  bg: 'lavender',
+                  _hover: {
+                    bg: 'coolGray.200',
+                  },
+                  _focus: {
+                    bg: 'coolGray.200:alpha.70',
+                  },
+                }}
+                _dark={{
+                  bg: 'coolGray.800',
+                  _hover: {
+                    bg: 'coolGray.900',
+                  },
+                  _focus: {
+                    bg: 'coolGray.900:alpha.70',
+                  },
+                }}
+                onValueChange={(itemValue) => {
+                  props.handleChange('designation')(itemValue); // Update Formik value
+                  setdesignation(itemValue); // Update local state
+                }}
+                required
+              >
+                <Select.Item shadow={2} label='Front Developer' value='front Developer' />
+                <Select.Item shadow={2} label='Tester' value='tester' />
+                <Select.Item shadow={2} label='Project Manager' value='project Manager' />
+                <Select.Item shadow={2} label='UI Designer' value='ui Designer' />
+                <Select.Item shadow={2} label='Backend Developer' value='backend Developer' />
+                <Select.Item shadow={2} label='Mobile APP Developer' value='mobile APP developer' />
+              </Select>
+            </VStack>
+            <Text style={Styles.errorText}>
+              {props.touched.designation && props.errors.designation}
+            </Text>
+
+
+
+
+    </View >
+
         <View style={Styles.buttonlol}>
         <Button color='black' title="Submit" onPress={props.handleSubmit} /> 
         </View>
@@ -102,6 +158,10 @@ input:{
   },
   buttonlol:{
     paddingTop:30
-  }
+  },
+  drop:{
+    marginBottom:20,
+    marginTop:20
+  },
 
 })

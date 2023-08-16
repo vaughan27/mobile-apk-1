@@ -27,6 +27,7 @@ function DetailsScreen({ navigation , route}) {
           name = {itemData.item.name}
           age = {itemData.item.age}
           description = {itemData.item.description}
+          designation = {itemData.item.designation}
           id={itemData.item.id}
           onDeleteItem={deleteGoalHandler}
           

@@ -3,7 +3,7 @@ import {StyleSheet, View, Text, Pressable} from 'react-native'
 
 function GoalItem(props){
     return(  
-    <View>
+    
       <View style={styles.goalItem} >  
         <Pressable android_ripple={{color: '#dddddd'}}
           onLongPress = {props.onDeleteItem.bind(this, props.id)}
@@ -13,13 +13,13 @@ function GoalItem(props){
             <Text style={styles.goalText } > {props.name} </Text>
             <Text style={styles.goalText } > {props.age} </Text>
             <Text style={styles.goalText } > {props.description} </Text>
+            <Text style={styles.goalText } > {props.designation} </Text>
           </View>
 
           
         </Pressable>
       </View>
-      <Button style={styles.buttonstuff} title='edit' onClick={console.log(' press')}  />
-    </View>
+      
     );
    
 };
@@ -46,6 +46,6 @@ const styles= StyleSheet.create({
         backgroundColor:'lightblue'
       },
       buttonstuff:{
-        width: '20%'
+        width: '10%'
       }
 });

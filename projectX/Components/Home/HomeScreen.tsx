@@ -6,7 +6,7 @@ import React, { useState } from "react";
 function HomeScreen({ navigation, route }) {
 
     const [modalVisible, setModalVisibility] = useState(false);
-    const [empdat, setEmpdat] = useState([ { id: '1', name: 'Zelda', age: 5, description: 'lorem ipsum' } ]);
+    const [empdat, setEmpdat] = useState([ { id: '1', name: 'Zelda', age: 5, description: 'lorem ipsum', designation: 'frontend developer' } ]);
     // console.log(route.params?.post)
 
     React.useEffect(() => {
@@ -21,7 +21,7 @@ function HomeScreen({ navigation, route }) {
     function addEntry(entry) {
       entry.key = Math.random().toString();
       setEmpdat((currentEntry) => {
-        return [{id: Math.random().toString(), name:entry.name, age:entry.age, description:entry.description }, 
+        return [{id: Math.random().toString(), name:entry.name, age:entry.age, description:entry.description, designation:entry.designation }, 
           ...currentEntry];
       })
       // console.log(empdat);
