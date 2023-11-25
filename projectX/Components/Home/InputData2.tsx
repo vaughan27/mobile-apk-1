@@ -20,8 +20,8 @@ const inputSchema = yup.object({
       .required()
 });
 
-export default function InputData(props) {
-  const [designation, setdesignation] = useState(`${props.editData.designation}`);
+export default function InputData2(props) {
+  const [designation, setdesignation] = useState('');
   if(props.editData){
     console.log(props);
   }
@@ -31,13 +31,12 @@ export default function InputData(props) {
       
   <View  style={Styles.container}> 
     <Formik
-      // initialValues={{ name: '', age: '', description: '', designation: ''  }}
-      initialValues={{ name: `${props.editData.name}`, age: `${props.editData.age}`, description: `${props.editData.description}`, designation:  designation }}
+      initialValues={{ name: '', age: '', description: '', designation: ''  }}
+      // initialValues={{ name: `${props.editData.name}`, age: `${props.editData.age}`, description: `${props.editData.description}`, designation: `${props.editData.designation}`  }}
       validationSchema={inputSchema}
       onSubmit={(values, actions) => {
-        // actions.resetForm();
+        actions.resetForm();
         values.designation = designation; 
-        values.id = `${props.editData.id}`;
         props.onAdd(values);
     }}
   >
@@ -129,7 +128,7 @@ export default function InputData(props) {
     </View >
 
         <View style={Styles.buttonlol}>
-        <Button color='#154c79' title="Submit" onPress={props.handleSubmit} /> 
+        <Button color='black' title="Submit" onPress={props.handleSubmit} /> 
         </View>
       </View>
 
